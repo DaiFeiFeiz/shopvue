@@ -4,13 +4,61 @@
       <div class="avatar-box">
         <img src="./../assets/img/logo.png" alt>
       </div>
-      <form action class="el-form"></form>
+      <el-form ref="loginFormref" :model="loginForm" :rules="loginFormRules">
+        <el-form-item prop="username">
+          <el-input v-model="loginForm.username">
+            <i slot="prefix" class="iconfont">&#xe89a;</i>
+          </el-input>
+        </el-form-item>
+        <el-form-item prop="password">
+          <el-input v-model="loginForm.password" type="password">
+            <i slot="prefix" class="iconfont">&#xe66c;</i>
+          </el-input>
+        </el-form-item>
+        <el-row>
+          <el-col :push="15">
+            <el-button type="primary" @click="login()">登录</el-button>
+            <el-button type="info" @click="reset()">重置</el-button>
+          </el-col>
+        </el-row>
+      </el-form>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      loginForm: {
+        username: '',
+        password: ''
+      },
+      loginFormRules: {
+        username: [{ required: true, message: '用户名必填', trigger: 'blur' }],
+        password: [{ required: true, message: '密码必填', trigger: 'blur' }]
+      }
+    }
+  },
+  methods: {
+    login() {
+      this.$refs.loginFormref.validate(async valid => {
+        if (valid) {
+          var { data: dt } = await this.$http.post('/login', this.loginForm)
+          // console.log(dt)
+          if (dt.meta.status !== 200) {
+            return this.$message.error(dt.meta.msg)
+          }
+          window.sessionStorage.setItem('token', dt.data.token)
+          this.$router.push('/home')
+        }
+      })
+    },
+    reset() {
+      this.$refs.loginFormref.resetFields()
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>
@@ -44,6 +92,13 @@ export default {}
         border-radius: 50%;
         background-color: #eee;
       }
+    }
+    .el-form {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding: 20px;
+      box-sizing: border-box;
     }
   }
 }
