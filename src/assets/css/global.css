@@ -3,3 +3,11 @@ html, body, #app {
     margin: 0;
     padding: 0;
 }
+
+/* 左侧边栏字体 、图标间距设置 */
+.iconfont {
+    margin-right: 10px;
+}
+.el-submenu__title, .el-menu-item {
+    font-size: 13px;
+  }

@@ -16,6 +16,18 @@ import axios from 'axios'
 
 // 配置 axios
 axios.defaults.baseURL = 'http://127.0.0.1:11333/api/private/v1/'
+
+// 设置 请求拦截器
+axios.interceptors.request.use(function(config) {
+  // console.dir(config)
+  //! config：是一个对象，是 axios 的一个子级成员，可以对其进行配置，这个配置信息会直接作用给 axios
+  var token = window.sessionStorage.getItem('token')
+  config.headers.Authorization = token
+  return config
+}, function(error) {
+  return Promise.reject(error)
+})
+
 Vue.prototype.$http = axios
 
 // 注册 element-UI 组件

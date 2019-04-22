@@ -8,18 +8,28 @@ import Login from '@/components/Login'
 // 引入 后台首页面
 import Home from '@/components/Home'
 
+// 引入 第三级页面 -- 欢迎页
+import Welcome from '@/components/Welcome'
+
 Vue.use(Router)
 
 const router = new Router({
-  routes: [
-    // {path: '/', component: HelloWorld},
+  routes: [{
+      path: '/',
+      redirect: '/home'
+    },
     {
       path: '/login',
       component: Login
     },
     {
       path: '/home',
-      component: Home
+      component: Home,
+      redirect: '/welcome',
+      children: [{
+        path: '/welcome',
+        component: Welcome
+      }]
     }
   ]
 })
