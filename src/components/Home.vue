@@ -52,6 +52,7 @@ export default {
   methods: {
     async getMemuList() {
       const { data: dt } = await this.$http.get('/menus')
+      // 能够获取左侧列表数据
       // console.log(dt)
       if (dt.meta.status !== 200) {
         return this.$message.error(dt.meta.msg)

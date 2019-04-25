@@ -11,6 +11,7 @@ import Home from '@/components/Home'
 // 引入 第三级页面
 import Welcome from '@/components/Welcome'
 import User from '@/components/User'
+import Rights from '@/components/Rights'
 
 Vue.use(Router)
 
@@ -23,7 +24,8 @@ const router = new Router({
       redirect: '/welcome',
       children: [
         {path: '/welcome', component: Welcome},
-        {path: '/users', component: User}]
+        {path: '/users', component: User},
+        {path: '/rights', component: Rights}]
     }
   ]
 })
