@@ -18,9 +18,10 @@
           :unique-opened="true"
           :collapse="isshow"
           :collapse-transition="false"
+          :router="true"
         >
           <el-submenu
-            :index="item.id"
+            :index="item.id + ''"
             v-for="(item, k) in menuList"
             :key="item.id"
             :style="{width:isshow? '65px' : '200px'}"
@@ -29,12 +30,10 @@
               <i class="iconfont" v-html="iconList[k]"></i>
               <span>{{ item.authName }}</span>
             </template>
-            <el-menu-item-group v-for="item2 in item.children" :key="item2.id">
-              <el-menu-item :index="item.id + '-' + item2.id">
-                <i class="el-icon-menu"></i>
-                <span>{{ item2.authName }}</span>
-              </el-menu-item>
-            </el-menu-item-group>
+            <el-menu-item :index="item2.path" v-for="item2 in item.children" :key="item2.id">
+              <i class="el-icon-menu"></i>
+              <span>{{ item2.authName }}</span>
+            </el-menu-item>
           </el-submenu>
         </el-menu>
       </el-aside>
@@ -53,7 +52,7 @@ export default {
   methods: {
     async getMemuList() {
       const { data: dt } = await this.$http.get('/menus')
-      console.log(dt)
+      // console.log(dt)
       if (dt.meta.status !== 200) {
         return this.$message.error(dt.meta.msg)
       }
