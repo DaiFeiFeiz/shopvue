@@ -14,6 +14,9 @@ import './assets/fonts/iconfont.css'
 // 引入 axios 文件
 import axios from 'axios'
 
+// 引入 面包屑 文件
+import Crumb from './components/breadcrumb/Crumb.vue'
+
 // 配置 axios
 axios.defaults.baseURL = 'http://127.0.0.1:11333/api/private/v1/'
 
@@ -34,6 +37,9 @@ Vue.prototype.$http = axios
 Vue.use(ElementUI)
 
 Vue.config.productionTip = false
+
+// 引入公共组件 --- 面包屑
+Vue.component('com-crumb', Crumb)
 
 /* eslint-disable no-new */
 new Vue({

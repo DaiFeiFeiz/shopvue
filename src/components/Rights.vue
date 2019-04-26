@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 面包屑导航 -->
-    <com-crumb name="权限"/>
+    <com-crumb name1="权限" name2="权限"/>
     <!-- 卡片区 -->
     <el-card class="box-card">
       <el-table :data="rightData" stripe style="width: 100%" border>
@@ -21,12 +21,7 @@
 </template>
 
 <script>
-// 引入 面包屑 导航
-import Crumb from './breadcrumb/Crumb'
 export default {
-  components: {
-    'com-crumb': Crumb
-  },
   created() {
     this.getRightList()
   },

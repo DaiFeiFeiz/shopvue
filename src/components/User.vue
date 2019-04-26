@@ -1,11 +1,7 @@
 <template>
   <div>
     <!-- 面包屑导航 -->
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>用户管理</el-breadcrumb-item>
-      <el-breadcrumb-item>用户列表</el-breadcrumb-item>
-    </el-breadcrumb>
+    <com-crumb name1="用户" name2="用户"></com-crumb>
     <!-- 【添加用户】 对话框 -->
     <el-dialog title="添加用户" :visible.sync="adduserVisible" @close="closeAdduser()" width="50%">
       <el-form
